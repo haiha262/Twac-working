@@ -28,7 +28,7 @@ include_once __DIR__ . '/wp-config.common.php';
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'traveller_local1');
+define('DB_NAME', 'traveller_local');
 
 /** MySQL database username */
 define('DB_USER', 'root');
