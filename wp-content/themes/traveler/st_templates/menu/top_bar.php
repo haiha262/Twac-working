@@ -158,15 +158,9 @@ $hidden_topbar_in_mobile = st()->get_option('hidden_topbar_in_mobile','on');
 
                         do_action('traveler_after_show_topbar_right');
                     ?>
-
                 </ul>
-
                 <?php endif; ?>            
             </div>
-            <div class="user-nav-wrapper">
-                                <?php get_template_part('users/user','nav');?>
-                            </div>
-                            <div class="collapse-button collapse-user"><i class="fa fa-user"></i></div>
         </div>
     </div>
 </div>

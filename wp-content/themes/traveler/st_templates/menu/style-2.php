@@ -43,7 +43,10 @@
                                     ) );
                                 }
                             } ?>
-                            
+                            <div class="user-nav-wrapper">
+                                <?php get_template_part('users/user','nav');?>
+                            </div>
+                            <div class="collapse-button collapse-user"><i class="fa fa-user"></i></div>
                         </div>
                     </div>
                 </div>
