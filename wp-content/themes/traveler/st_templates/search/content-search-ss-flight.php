@@ -1,3 +1,4 @@
+<script src="jquery-3.2.1.min.js"></script>
 <?php
 /**
  * @package WordPress
@@ -13,7 +14,7 @@
 wp_enqueue_script( 'bootstrap-datepicker.js' ); 
 wp_enqueue_script( 'bootstrap-datepicker-lang.js' );
 wp_enqueue_script('st.travelpayouts');
-wp_enqueue_script( 'flights.js');
+wp_enqueue_script( 'flights.js');// hatran add
 $fields = array(
     // hatran add
      array(
@@ -24,7 +25,7 @@ $fields = array(
         'layout2_col' => '12',
         'is_required' => 'on'
     ),
-     //end ha.tran
+     //end hatran
     array(
         'title' => esc_html__('Origin', ST_TEXTDOMAIN),
         'name' => 'origin',
