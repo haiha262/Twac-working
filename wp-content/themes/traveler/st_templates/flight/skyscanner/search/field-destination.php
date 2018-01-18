@@ -29,6 +29,6 @@ if(!isset($field_size)) $field_size='lg';
     <label for="ss_location_destination"><?php echo esc_html( $title)?></label>
     <i class="fa fa-plane input-icon"></i>
     <div class="st-select-wrapper ss-flight-wrapper" >
-        <input <?php echo $is_required; ?> id="ss_location_destination" type="text" class="form-control ss-flight-location" autocomplete="off" data-value="" data-name="ss_destination" value="" placeholder="<?php echo esc_html( $placeholder ); ?>">
+        <input <?php echo $is_required; ?> name="searchAir.segments[0].arrivalCity" id="searchAir.segments0.arrivalCity" type="text" class="form-control ss-flight-location" autocomplete="off" data-value="" data-name="ss_destination" value="" placeholder="<?php echo esc_html( $placeholder ); ?>">
     </div>
 </div>

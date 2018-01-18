@@ -28,4 +28,11 @@ if($is_required == 'on'){
     <i class="fa fa-calendar input-icon input-icon-highlight"></i>
     <input id="field-depart-date" placeholder="<?php echo TravelHelper::getDateFormatJs(); ?>" class="form-control tp_depart_date <?php echo esc_attr($is_required) ?>" readonly value="" type="text" />
     <input type="hidden" class="tp-date-from ss_depart" value="">
+    
+    <input name="searchAir.segments[0].departTime" value="00:00" type="hidden" >
+    <input class="day" id="searchAir.segments0.departDate.day" name="searchAir.segments[0].departDate.day" type="hidden">
+    <input class="month" id="searchAir.segments0.departDate.month" name="searchAir.segments[0].departDate.month" type="hidden">
+    <input class="year" id="searchAir.segments0.departDate.year" name="searchAir.segments[0].departDate.year" type="hidden">
+
+
 </div>
