@@ -30,7 +30,7 @@ $(function(){
   var earliestDeparture = new Date(today.getFullYear(), today.getMonth(), today.getDate()+Explore.Options.earliestDeparture);
   var defaultReturn = new Date(earliestDeparture.getFullYear(), earliestDeparture.getMonth(), earliestDeparture.getDate()+Explore.Options.defaultReturn);
   //setup calendars
-if($("#field-depart-date").val() != '')
+if($("#field-depart-date").val() != null)
 {
      var arr = $("#field-depart-date").val().split('/');
     $("#searchAir\\.segments0\\.departDate\\.day").val(arr[0]);
@@ -45,7 +45,7 @@ $("#field-depart-date").change(function(){
 });
 
 
-if($("#field-return-date").val() != '')
+if($("#field-return-date").val() != null)
 {
     var arr = $("#field-return-date").val().split('/');
     $("#searchAir\\.segments1\\.departDate\\.day").val(arr[0]);

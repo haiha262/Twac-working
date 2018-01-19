@@ -44,7 +44,7 @@
             </div>
         </form>
         <?php endif; ?>
-    <?php else: ?>
+    <?php else: //hatran EDIT MENU STYLE 1 HERE?>
         <ul class="top-user-area-list list list-horizontal list-border">
             <?php 
                 do_action('traveler_before_show_header_menu');
@@ -60,7 +60,7 @@
                         if( $val['header_item'] == 'language' ){
                             echo st()->load_template("menu/language_select" , null ,  array('container' =>"li"  , "class"=>"top-user-area-lang nav-drop"));
                         }
-                        if( $val['header_item'] == 'link' ){
+                        if( $val['header_item'] == 'link'&& empty($val['header_custom_link_title'])){
                             $icon = '';
                             if( !empty( $val['header_custom_link_icon'] ) ){
                                 $icon = esc_html( $val['header_custom_link_icon'] );
@@ -96,6 +96,25 @@
             ?>
         </ul>
     <?php endif; ?>    
+    </div>
+</div>
+<div class="col-md-9">
+    <div class="top-user-area clearfix">
+        <ul class="top-user-area-list list list-horizontal list-border">
+            <?php 
+                do_action('traveler_before_show_header_menu');
+
+                foreach( $sort_header_menu as $key => $val ):
+                    if( $val['header_item'] == 'link'  && !empty($val['header_custom_link_title'])){
+                            $icon = '';
+                            if( !empty( $val['header_custom_link_icon'] ) ){
+                                $icon = esc_html( $val['header_custom_link_icon'] );
+                            }
+                            echo '<li><a href="'. esc_url( $val['header_custom_link'] ).'"> <i class="fa '. $icon .' mr5"></i>'. esc_html( $val['header_custom_link_title'] ).'</a></li>';
+                        }
+                endforeach; 
+            ?>
+        </ul>
     </div>
 </div>
 <?php
