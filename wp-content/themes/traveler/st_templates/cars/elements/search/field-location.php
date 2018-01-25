@@ -11,7 +11,7 @@
  */
 wp_enqueue_style('st-select.css');
 wp_enqueue_script('st-select.js');
-
+wp_enqueue_script( 'carSearch.js');// hatran add JS
 $default = array(
     'title' => '',
     'is_required' => 'off',
@@ -60,65 +60,49 @@ if ($enable_tree == 'on') {
 } else {
     $locations = TravelHelper::getListFullNameLocation('st_cars');
 }
-
+//hatran add for CAR tab in home page
+if(!$use_theme_car)
+{
 ?>
-<div class="form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
+    <div class="form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
 
-    <label for="field-car-dropoff"><?php echo $pickup_title; ?></label>
-    <i class="fa fa-map-marker input-icon"></i>
-    <div class="st-select-wrapper">
-        <input id="field-car-dropoff" data-children="location_id_drop_off" data-clear="clear" autocomplete="off"
-               type="text" name="pick-up" value="<?php echo $pick_up; ?>"
-               class="form-control st-location-name <?php echo esc_attr($is_required); ?>"
-               placeholder="<?php if (isset($placeholder[0])) echo $placeholder[0]; ?>">
-        <select data-current-country="" name="location_id_pick_up" class="st-location-id st-hidden" tabindex="-1">
-            <option value=""></option>
-            <?php
-            if ($enable_tree == 'on') {
-                TravelHelper::buildTreeOptionLocation($locations, $location_id_pick_up);
-            } else {
-                if (is_array($locations) && count($locations)):
-                    foreach ($locations as $key => $value):
-                        ?>
-                        <option <?php selected($value->ID, $location_id_pick_up); ?>
-                                data-country="<?php echo $value->Country; ?>"
-                                value="<?php echo $value->ID; ?>"><?php echo $value->fullname; ?></option>
-                    <?php endforeach; endif;
-            }
-            ?>
-        </select>
-        <div class="option-wrapper"></div>
-    </div>
-</div>
-<div class="same_location form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left <?php if ($car_unit == "distance") echo "field-hidden"; ?>">
-    <!-- <label  for="required_dropoff"> -->
-    <input style="display:none;" <?php if ($required_dropoff == 'required_dropoff' and $car_unit != "distance") echo 'checked'; ?>
-           type="checkbox" name="required_dropoff" value="required_dropoff" id="" class="required-field">
-    <!-- </label> -->
-    <a href='javascript:void(0)' id='required_dropoff' class="required-field change_same_location"
-       data-change="<?php echo __("Same Location", ST_TEXTDOMAIN); ?>"><?php echo __("Different Location", ST_TEXTDOMAIN); ?></a>
-</div>
-<?php if ($car_unit == "distance") $hidden = ""; ?>
-<div class="form-drop-off <?php echo esc_html($hidden); ?>">
-    <div class=" form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
-
-        <label for="field-car-pickup"><?php echo $dropoff_title; ?></label>
+        <label for="field-car-dropoff"><?php echo $pickup_title; ?></label>
         <i class="fa fa-map-marker input-icon"></i>
         <div class="st-select-wrapper">
-            <input id="field-car-pickup" data-parent="location_id_pick_up" data-clear="clear" autocomplete="off"
-                   type="text" name="drop-off" value="<?php echo $drop_off; ?>" class="form-control st-location-name"
-                   placeholder="<?php if (isset($placeholder[1])) echo $placeholder[1]; ?>">
-            <select data-current-country="<?php if ($location_country) echo $location_country; ?>"
-                    name="location_id_drop_off" class="st-location-id st-hidden " tabindex="-1">
+            <input id="searchCar.segments0.pickupCity" name="searchCar.segments[0].pickupCity" data-children="location_id_drop_off"
+                   data-clear="clear" autocomplete="off"
+                   type="text" name="pick-up" value="<?php echo $pick_up; ?>"
+                   class="form-control st-location-name <?php echo esc_attr($is_required); ?> "
+                   placeholder="<?php if (isset($placeholder[0])) echo $placeholder[0]; ?>">
+
+            <div class="option-wrapper"></div>
+        </div>
+    </div>
+<?php
+}
+else {
+    ?>
+
+
+    <div class="form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
+
+        <label for="field-car-dropoff"><?php echo $pickup_title; ?></label>
+        <i class="fa fa-map-marker input-icon"></i>
+        <div class="st-select-wrapper">
+            <input id="field-car-dropoff" data-children="location_id_drop_off" data-clear="clear" autocomplete="off"
+                   type="text" name="pick-up" value="<?php echo $pick_up; ?>"
+                   class="form-control st-location-name <?php echo esc_attr($is_required); ?>"
+                   placeholder="<?php if (isset($placeholder[0])) echo $placeholder[0]; ?>">
+            <select data-current-country="" name="location_id_pick_up" class="st-location-id st-hidden" tabindex="-1">
                 <option value=""></option>
                 <?php
                 if ($enable_tree == 'on') {
-                    TravelHelper::buildTreeOptionLocation($locations, $location_id_drop_off);
+                    TravelHelper::buildTreeOptionLocation($locations, $location_id_pick_up);
                 } else {
                     if (is_array($locations) && count($locations)):
                         foreach ($locations as $key => $value):
                             ?>
-                            <option <?php selected($value->ID, $location_id_drop_off); ?>
+                            <option <?php selected($value->ID, $location_id_pick_up); ?>
                                     data-country="<?php echo $value->Country; ?>"
                                     value="<?php echo $value->ID; ?>"><?php echo $value->fullname; ?></option>
                         <?php endforeach; endif;
@@ -128,4 +112,46 @@ if ($enable_tree == 'on') {
             <div class="option-wrapper"></div>
         </div>
     </div>
-</div>    
+    <div class="same_location form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left <?php if ($car_unit == "distance") echo "field-hidden"; ?>">
+        <!-- <label  for="required_dropoff"> -->
+        <input style="display:none;" <?php if ($required_dropoff == 'required_dropoff' and $car_unit != "distance") echo 'checked'; ?>
+               type="checkbox" name="required_dropoff" value="required_dropoff" id="" class="required-field">
+        <!-- </label> -->
+        <a href='javascript:void(0)' id='required_dropoff' class="required-field change_same_location"
+           data-change="<?php echo __("Same Location", ST_TEXTDOMAIN); ?>"><?php echo __("Different Location", ST_TEXTDOMAIN); ?></a>
+    </div>
+    <?php if ($car_unit == "distance") $hidden = ""; ?>
+    <div class="form-drop-off <?php echo esc_html($hidden); ?>">
+        <div class=" form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
+
+            <label for="field-car-pickup"><?php echo $dropoff_title; ?></label>
+            <i class="fa fa-map-marker input-icon"></i>
+            <div class="st-select-wrapper">
+                <input id="field-car-pickup" data-parent="location_id_pick_up" data-clear="clear" autocomplete="off"
+                       type="text" name="drop-off" value="<?php echo $drop_off; ?>"
+                       class="form-control st-location-name"
+                       placeholder="<?php if (isset($placeholder[1])) echo $placeholder[1]; ?>">
+                <select data-current-country="<?php if ($location_country) echo $location_country; ?>"
+                        name="location_id_drop_off" class="st-location-id st-hidden " tabindex="-1">
+                    <option value=""></option>
+                    <?php
+                    if ($enable_tree == 'on') {
+                        TravelHelper::buildTreeOptionLocation($locations, $location_id_drop_off);
+                    } else {
+                        if (is_array($locations) && count($locations)):
+                            foreach ($locations as $key => $value):
+                                ?>
+                                <option <?php selected($value->ID, $location_id_drop_off); ?>
+                                        data-country="<?php echo $value->Country; ?>"
+                                        value="<?php echo $value->ID; ?>"><?php echo $value->fullname; ?></option>
+                            <?php endforeach; endif;
+                    }
+                    ?>
+                </select>
+                <div class="option-wrapper"></div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+?>

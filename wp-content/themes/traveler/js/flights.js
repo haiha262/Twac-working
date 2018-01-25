@@ -86,7 +86,7 @@ $("#field-return-date").change(function(){
   }); 
 
   //setup validation, copy
-  $("#explore-flights, #explore-hotels form, #explore-cars form").submit(function(event){
+  $("#explore-flights form").submit(function(event){
      //$(".explore-error").detach();
      // $(".explore-validate-airport",this).each(function(){
      //     var val = $(this).val();

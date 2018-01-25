@@ -19,6 +19,7 @@
             </div>
         </div>
     </div>
+    <?php //hatran MENU style 1 EDIT here?>
     <div class="main_menu_wrap" id="menu1">
         <div class="<?php echo apply_filters( 'st_default_menu_wrapper', "container" ); ?>">
             <div class="nav">

@@ -360,7 +360,8 @@
 
 
             wp_enqueue_script( 'jquery-sticky', get_template_directory_uri() . '/js/sticky.js', [ 'jquery' ], null, true );
-            wp_enqueue_script( 'flights', get_template_directory_uri() . '/js/flights.js', [ 'jquery' ], null, true );//hatran add
+            wp_enqueue_script( 'flights', get_template_directory_uri() . '/js/flights.js', [ 'jquery' ], null, true );//hatran add Load JS for execute function - in FLIGHTS TAB in home screen
+            wp_enqueue_script( 'carSearch', get_template_directory_uri() . '/js/carSearch.js', [ 'jquery' ], null, true );//hatran add Load JS for execute function - in CAR TAB in home screen
 
             wp_localize_script( 'jquery', 'st_checkout_text', [
                 'without_pp'        => __( 'Submit Request', ST_TEXTDOMAIN ),

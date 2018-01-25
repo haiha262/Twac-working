@@ -1,4 +1,4 @@
-<script src="jquery-3.2.1.min.js"></script>
+
 <?php
 /**
  * @package WordPress
@@ -16,7 +16,7 @@ wp_enqueue_script( 'bootstrap-datepicker-lang.js' );
 wp_enqueue_script('st.travelpayouts');
 wp_enqueue_script( 'flights.js');// hatran add
 $fields = array(
-    // hatran add
+    // hatran add - in FLIGHTS TAB in home screen
      array(
     
         'name' => 'Radio',
@@ -58,7 +58,7 @@ $fields = array(
         'layout2_col' => '6',
         'is_required' => 'off'
     ),
-    // hatran add
+    // hatran add Adult field - in FLIGHTS TAB in home screen
     array(
         'title' => esc_html__('Adult', ST_TEXTDOMAIN),
         'name' => 'people',
@@ -143,7 +143,7 @@ if (!isset($field_size)) $field_size = '';
     <input type="hidden" class="skyscanner-search-flights-data" data-api="<?php echo esc_attr($api_key)?>" data-locale="<?php echo esc_attr($locale)?>" data-currency="<?php echo esc_attr($currency)?>" data-country="<?php echo esc_attr($country); ?>">
     <input type="hidden" name="apiKey" value="<?php echo esc_attr($api_key); ?>">
     <button class="btn btn-primary btn-lg" type="submit"><?php echo esc_html__('Search For Flights', ST_TEXTDOMAIN); ?></button>
-    <!-- //hatran add
+    <!-- //hatran rem this text in - in FLIGHTS TAB in home screen
     <span class="api_info"><i class="fa fa-info-circle"></i> -->
     <?php //echo esc_html__('Search flights API of ', ST_TEXTDOMAIN)?>
     <!--     <a href="https://skyscanner.net" target="_blank">Skyscanner</a>

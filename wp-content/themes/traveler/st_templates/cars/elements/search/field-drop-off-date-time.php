@@ -65,3 +65,6 @@ if(!isset( $field_size ))
         </div>
     </div>
 </div>
+<?php
+
+?>
