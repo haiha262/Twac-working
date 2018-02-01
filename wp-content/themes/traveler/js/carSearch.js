@@ -1,5 +1,5 @@
 var last_select_clicked = !1;
-$('.st-location-name').each(function() {
+$('.st-location-search-name').each(function() {
     var t = $(this);
     var parent = t.closest('.st-select-wrapper');
     $(this).keyup(function(event) {

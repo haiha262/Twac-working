@@ -43,7 +43,7 @@ if(!$use_theme_hotel)
         <div class="st-select-wrapper">
             <input id="searchHotelV2.segments0.city" name="searchHotelV2.segments[0].city" autocomplete="off" type="text" name="location_name"
                    value="<?php echo $location_name; ?>"
-                   class="form-control st-location-name  <?php echo esc_attr($is_required); ?>"
+                   class="form-control st-location-name  <?php echo esc_attr($is_required); ?> st-location-search-name"
                    placeholder="<?php if ($placeholder) echo $placeholder; ?>">
 
             </select>

@@ -72,7 +72,7 @@ if(!$use_theme_car)
             <input id="searchCar.segments0.pickupCity" name="searchCar.segments[0].pickupCity" data-children="location_id_drop_off"
                    data-clear="clear" autocomplete="off"
                    type="text" name="pick-up" value="<?php echo $pick_up; ?>"
-                   class="form-control st-location-name <?php echo esc_attr($is_required); ?> "
+                   class="form-control st-location-name <?php echo esc_attr($is_required); ?> st-location-search-name"
                    placeholder="<?php if (isset($placeholder[0])) echo $placeholder[0]; ?>">
 
             <div class="option-wrapper"></div>
