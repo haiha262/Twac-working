@@ -1,7 +1,7 @@
 <?php
 wp_enqueue_style( 'st-select.css' );
 wp_enqueue_script( 'st-select.js' );
-
+wp_enqueue_script( 'hotelSearch.js');// hatran add
 $default=array(
     'title'=>'',
     'placeholder'=>'',
@@ -33,27 +33,55 @@ if($enable_tree == 'on'){
 }else{
     $locations = TravelHelper::getListFullNameLocation( 'st_hotel' );
 }
+if(!$use_theme_hotel)
+{
 ?>
-<div class="form-group form-group-<?php echo esc_attr($field_size)?> form-group-icon-left">
-    
-    <label for="field-hotel-location"><?php echo esc_html( $title)?></label>
-    <i class="fa fa-map-marker input-icon"></i>
-    <div class="st-select-wrapper">
-        <input id="field-hotel-location" autocomplete="off" type="text" name="location_name" value="<?php echo $location_name; ?>" class="form-control st-location-name  <?php echo esc_attr($is_required); ?>" placeholder="<?php if($placeholder) echo $placeholder; ?>">
-        <select id="field-hotel-location" name="location_id" class="st-location-id st-hidden" placeholder="<?php if($placeholder) echo $placeholder; ?>" tabindex="-1">
-            <option value=""></option>
-            <?php
-            if($enable_tree == 'on'){
-                TravelHelper::buildTreeOptionLocation($locations, $location_id);
-            }else{
-                if(is_array($locations) && count($locations)):
-                    foreach($locations as $key => $value):
-                        ?>
-                        <option <?php selected($value->ID, $location_id); ?> value="<?php echo $value->ID; ?>"><?php echo $value->fullname; ?></option>
-                    <?php endforeach; endif;
-            }
-            ?>
-        </select>
-        <div class="option-wrapper"></div>
+    <div class="form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
+
+        <label for="field-hotel-location"><?php echo esc_html($title) ?></label>
+        <i class="fa fa-map-marker input-icon"></i>
+        <div class="st-select-wrapper">
+            <input id="searchHotelV2.segments0.city" name="searchHotelV2.segments[0].city" autocomplete="off" type="text" name="location_name"
+                   value="<?php echo $location_name; ?>"
+                   class="form-control st-location-name  <?php echo esc_attr($is_required); ?>"
+                   placeholder="<?php if ($placeholder) echo $placeholder; ?>">
+
+            </select>
+            <div class="option-wrapper"></div>
+        </div>
     </div>
-</div>
+    <?php
+}
+else {
+    ?>
+    <div class="form-group form-group-<?php echo esc_attr($field_size) ?> form-group-icon-left">
+
+        <label for="field-hotel-location"><?php echo esc_html($title) ?></label>
+        <i class="fa fa-map-marker input-icon"></i>
+        <div class="st-select-wrapper">
+            <input id="field-hotel-location" autocomplete="off" type="text" name="location_name"
+                   value="<?php echo $location_name; ?>"
+                   class="form-control st-location-name  <?php echo esc_attr($is_required); ?>"
+                   placeholder="<?php if ($placeholder) echo $placeholder; ?>">
+            <select id="field-hotel-location" name="location_id" class="st-location-id st-hidden"
+                    placeholder="<?php if ($placeholder) echo $placeholder; ?>" tabindex="-1">
+                <option value=""></option>
+                <?php
+                if ($enable_tree == 'on') {
+                    TravelHelper::buildTreeOptionLocation($locations, $location_id);
+                } else {
+                    if (is_array($locations) && count($locations)):
+                        foreach ($locations as $key => $value):
+                            ?>
+                            <option <?php selected($value->ID, $location_id); ?>
+                                    value="<?php echo $value->ID; ?>"><?php echo $value->fullname; ?></option>
+                        <?php endforeach; endif;
+                }
+                ?>
+            </select>
+            <div class="option-wrapper"></div>
+        </div>
+    </div>
+    <?php
+}
+?>
