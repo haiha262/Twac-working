@@ -29,8 +29,12 @@ $is_user_nav = st()->get_option('enable_user_nav','on') ?>
             ?>
         </a>
     <?php echo  '</'.esc_attr($container).'>' ;?>
-    <?php echo  '<'.esc_attr($container).'>' ;?>
-        <a class="btn-st-logout" href="<?php echo wp_logout_url(home_url())?>"><?php st_the_language('sign_out')?></a>
+    <?php echo  '<'.esc_attr($container).' class="top-user-logout">' ;?>
+        <a class="btn-st-logout" href="<?php echo wp_logout_url(home_url())?>" title="<?php st_the_language('sign_out');?>">
+            <?php //hatran add icon and rem the sign out text
+             echo "<i class='fa fa-sign-out mr5'></i>";
+            // st_the_language('sign_out')
+            ?></a>
     <?php echo  '</'.$container.'>' ;?>
     <?php else: ?>
          <?php echo '<'.esc_attr($container).' class="'.esc_attr($class_default).'">'; ?>    
@@ -47,7 +51,19 @@ $is_user_nav = st()->get_option('enable_user_nav','on') ?>
                 $page_login = $page_user_register = 'javascript:void(0)';
             }
             ?>
-            <a href="#" onclick="return false;"><?php echo __("Account", ST_TEXTDOMAIN);?><i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+
+            <a href="#" onclick="return false;">
+        <?php //hatran add icon
+           // echo "<i class='fa fa-sign-in mr5'></i>";
+        ?>
+
+        <?php
+                //hatran rem text/ icon down/up at account loign
+                echo __("Account", ST_TEXTDOMAIN);
+?>
+                <i class="fa fa-angle-down"></i>
+                <i class="fa fa-angle-up"></i></a>
+
             <ul class="list nav-drop-menu user_nav_big social_login_nav_drop" >
                 <li><a  class="" <?php echo ($login_modal); ?>  href="<?php echo ($page_login) ?>"><?php echo __("Login", ST_TEXTDOMAIN);?></a></li>
                 <li><a  class="" <?php echo ($res_modal); ?>  href="<?php echo ($page_user_register) ?>" ><?php echo __("Sign Up", ST_TEXTDOMAIN);?></a></li>

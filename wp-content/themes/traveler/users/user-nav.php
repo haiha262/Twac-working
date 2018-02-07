@@ -15,6 +15,16 @@
     ob_start();
 ?>
 <div class="col-md-9">
+    <?php //hatran add Login / Sign out on top ?>
+    <div class="top-user-area clearfix">
+        <ul class="top-user-area-list list list-horizontal list-border">
+            <?php
+            //Login
+            echo st()->load_template("menu/login_select" , null ,  array('container' =>"li"  , "class"=>"top-user-area-avatar"));
+            ?>
+        </ul>
+    </div>
+
     <div class="top-user-area clearfix">
     <?php 
         /**
@@ -52,7 +62,8 @@
                 foreach( $sort_header_menu as $key => $val ):
                     if( !empty( $val['header_item'] ) ){
                         if( $val['header_item'] == 'login' ){
-                            echo st()->load_template("menu/login_select" , null ,  array('container' =>"li"  , "class"=>"top-user-area-avatar"));
+                            //hatran rem login/logout inline with the social icon
+                            // echo st()->load_template("menu/login_select" , null ,  array('container' =>"li"  , "class"=>"top-user-area-avatar"));
                         }
                         if( $val['header_item'] == 'currency' ){
                             echo st()->load_template("menu/currency_select" , null ,  array('container' =>"li"  , "class"=>"nav-drop nav-symbol"));
@@ -60,12 +71,16 @@
                         if( $val['header_item'] == 'language' ){
                             echo st()->load_template("menu/language_select" , null ,  array('container' =>"li"  , "class"=>"top-user-area-lang nav-drop"));
                         }
-                        if( $val['header_item'] == 'link'&& empty($val['header_custom_link_title'])){
+                        if( $val['header_item'] == 'link'&& empty($val['header_custom_link_title'])){//hatran add
                             $icon = '';
                             if( !empty( $val['header_custom_link_icon'] ) ){
                                 $icon = esc_html( $val['header_custom_link_icon'] );
                             }
-                            echo '<li><a href="'. esc_url( $val['header_custom_link'] ).'"> <i class="fa '. $icon .' mr5"></i>'. esc_html( $val['header_custom_link_title'] ).'</a></li>';
+                            if ($icon == "fa-fone" || $icon == "fa-envelope-o" ) {
+                                echo '<li><a href="' . esc_url($val['header_custom_link']) . '"> <i class="fa ' . $icon . ' mr5"></i>' . esc_html($val['header_custom_link_title']) . '</a></li>';
+                            }else {
+                                echo '<li><a href="' . esc_url($val['header_custom_link']) . '"> <i class="fa ' . $icon . ' box-icon-social round animate-icon-bottom-to-top"></i>' . esc_html($val['header_custom_link_title']) . '</a></li>';
+                            }
                         }
                         if( $val['header_item'] == 'shopping_cart' ){
                             echo st()->load_template("menu/shopping_cart" , null ,  array('container' =>"li"  , "class"=>"top-user-area-shopping"));
@@ -95,27 +110,26 @@
                 do_action('traveler_after_show_header_menu');
             ?>
         </ul>
-    <?php endif; ?>    
+    <?php endif; ?>
     </div>
-</div>
-<div class="col-md-9">
     <div class="top-user-area clearfix">
         <ul class="top-user-area-list list list-horizontal list-border">
-            <?php 
-                do_action('traveler_before_show_header_menu');
+            <?php
 
-                foreach( $sort_header_menu as $key => $val ):
-                    if( $val['header_item'] == 'link'  && !empty($val['header_custom_link_title'])){
-                            $icon = '';
-                            if( !empty( $val['header_custom_link_icon'] ) ){
-                                $icon = esc_html( $val['header_custom_link_icon'] );
-                            }
-                            echo '<li><a href="'. esc_url( $val['header_custom_link'] ).'"> <i class="fa '. $icon .' mr5"></i>'. esc_html( $val['header_custom_link_title'] ).'</a></li>';
-                        }
-                endforeach; 
+            foreach( $sort_header_menu as $key => $val ):
+                if( $val['header_item'] == 'link'  && !empty($val['header_custom_link_title'])){
+                    $icon = '';
+                    if( !empty( $val['header_custom_link_icon'] ) ){
+                        $icon = esc_html( $val['header_custom_link_icon'] );
+                    }
+                    echo '<li><a href="'. esc_url( $val['header_custom_link'] ).'"> <i class="fa '. $icon .' mr5"></i>'. esc_html( $val['header_custom_link_title'] ).'</a></li>';
+                }
+            endforeach;
             ?>
         </ul>
     </div>
+
+
 </div>
 <?php
     echo  apply_filters("st_header_right_content" ,@ob_get_clean() ) ;
