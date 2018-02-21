@@ -9,6 +9,7 @@
  * Created by ShineTheme
  *
  */
+
 $default=array(
     'title'=>'',
     'taxonomy'=>'',
@@ -23,7 +24,7 @@ if(isset($data)){
 }
 
 if(!isset($field_size)) $field_size='lg';
-
+//hatran TODO this line the term is already get all Categories.
 $terms = get_terms($taxonomy,array('hide_empty'=> false));
 
 if($is_required == 'on'){
@@ -50,8 +51,21 @@ if (!empty($st_direction) and $st_direction == 'vertical') { $checkbox_item_size
             if(!empty($is_taxonomy[$taxonomy])){
                 $args['selected'] = $is_taxonomy[$taxonomy];
             }
-            wp_dropdown_categories( $args );
+            /* //hatran hard code category
+             * wp_dropdown_categories( $args );
+            */
             ?>
+            <select name="taxonomy[st_tour_type]" id="field-tour-tax-st_tour_type" class="form-control">
+                <option value="">— Select —</option>
+
+                <option class="level-0" value="145">Volunteering Holidays</option>
+                <option class="level-0" value="146">Community Development Programme</option>
+                <option class="level-0" value="147">Teach English Overseas</option>
+                <option class="level-0" value="148">Youth Volunteering</option>
+                <option class="level-0" value="149">Volunteer with Animals and Conservation</option>
+                <option class="level-0" value="150">Internship Overseas Offers in sports, medical and other areas</option>
+                <option class="level-0" value="152">Work with children &amp; orphanages</option>
+            </select>
         </div>
     <?php }else{ ?>
         <div class="form-custom-taxonomy form-group form-group-<?php echo esc_attr($field_size)?>" taxonomy="<?php echo esc_html($taxonomy) ?>">

@@ -16,7 +16,7 @@
 ?>
 <div class="col-md-9">
     <?php //hatran add Login / Sign out on top ?>
-    <div class="top-user-area clearfix">
+    <div class="top-user-area clearfix login-field">
         <ul class="top-user-area-list list list-horizontal list-border">
             <?php
             //Login
