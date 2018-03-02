@@ -1,3 +1,4 @@
+var timerid;
 var last_select_clicked = !1;
 $('.st-location-search-name').each(function() {
     var t = $(this);
@@ -98,7 +99,9 @@ $('.st-location-search-name').each(function() {
                 $('select option[value="' + value + '"]', parent).prop('selected', !0);
                 $('.option-wrapper').html('').hide();
                 //update_link()
+                getTaxonomy(value);
             }
+
         }
     });
 
@@ -137,6 +140,7 @@ $('.st-location-search-name').each(function() {
     })
 
 });
+
 function getTwentyFourHourTime(amPmString) {
     var d = new Date("1/1/2013 " + amPmString);
     return d.getHours() + ':' + d.getMinutes();

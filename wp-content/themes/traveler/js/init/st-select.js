@@ -1,4 +1,27 @@
+
 jQuery(document).ready(function($) {
+//hatran add select type in Home Tour
+
+    $taxonomyArray = new Array();
+    var location_val= '';
+    $.ajax({
+        type: 'GET',
+        dataType: "xml",
+        url: 'taxonomy.xml',
+        success: function (xml) {
+            $i=0;
+            $(xml).find('location').each(function(){
+                var sLocation_id = this.getAttributeNode('locationId').value;
+                var categoriesID = $(this).find('categoriesID').text();
+                var categoriesName = $(this).find('categoriesName').text();
+                $taxonomyArray[$i] = new Array(sLocation_id,categoriesID,categoriesName);
+                $i++;
+
+            })
+        }
+
+    });
+
     var last_select_clicked=false;
     $('body').append('<div class="option-wrapper st-option-wrapper"></div>');
     var t_temp;
@@ -296,6 +319,11 @@ jQuery(document).ready(function($) {
                         $('select[name="' + name + '"]', form).attr('data-current-country', country);
                     }
                 }
+                //hatran add select type in Home Tour
+                replaceSelectType(value);
+
+
+
             }
 
             last_select_clicked.focusNextInputField();
@@ -387,7 +415,20 @@ jQuery(document).ready(function($) {
             return false;
         });
     };
+//hatran add select type in Home Tour
+    function replaceSelectType(location_id)
+    {
 
+        var $el = $('#field-tour-tax-st_tour_type');
+        $el.html(' ');
+        $el.append("<option>--Select--</option>");
+        $.each($taxonomyArray, function(key, value) {
+            if (location_id == value[0]) {
+                $el.append($("<option class='level-0' ></option>")
+                    .attr("value", value[1]).text(value[2]));
+            }
+        });
+    }
 });
 
 

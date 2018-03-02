@@ -51,21 +51,12 @@ if (!empty($st_direction) and $st_direction == 'vertical') { $checkbox_item_size
             if(!empty($is_taxonomy[$taxonomy])){
                 $args['selected'] = $is_taxonomy[$taxonomy];
             }
-            /* //hatran hard code category
-             * wp_dropdown_categories( $args );
-            */
-            ?>
-            <select name="taxonomy[st_tour_type]" id="field-tour-tax-st_tour_type" class="form-control">
-                <option value="">— Select —</option>
+             //hatran hard code category
+            wp_dropdown_categories( $args );
+            //hatran add select type in Home Tour
+            createXMLfile(TravelHelper::getListTaxonomy(''));
 
-                <option class="level-0" value="145">Volunteering Holidays</option>
-                <option class="level-0" value="146">Community Development Programme</option>
-                <option class="level-0" value="147">Teach English Overseas</option>
-                <option class="level-0" value="148">Youth Volunteering</option>
-                <option class="level-0" value="149">Volunteer with Animals and Conservation</option>
-                <option class="level-0" value="150">Internship Overseas Offers in sports, medical and other areas</option>
-                <option class="level-0" value="152">Work with children &amp; orphanages</option>
-            </select>
+            ?>
         </div>
     <?php }else{ ?>
         <div class="form-custom-taxonomy form-group form-group-<?php echo esc_attr($field_size)?>" taxonomy="<?php echo esc_html($taxonomy) ?>">
@@ -95,3 +86,54 @@ if (!empty($st_direction) and $st_direction == 'vertical') { $checkbox_item_size
         </div>
     <?php } ?>
 
+<?php
+//hatran add select type in Home Tour
+function createXMLfile($taxonomyArray){
+
+    $filePath = 'taxonomy.xml';
+    $dom     = new DOMDocument('1.0', 'utf-8');
+    $taxonomy      = $dom->createElement('Taxonomy');
+    $dom->appendChild($taxonomy);
+
+    $current_location_id = "";
+    for($i=0; $i<count($taxonomyArray); $i++){
+        $location_id       =  $taxonomyArray[$i]->location_id;
+
+        $location_name      =  $taxonomyArray[$i]->location_name;
+
+        //$post_id    =  $taxonomyArray[$i]->post_id;
+
+        $term_taxonomy_id     =  $taxonomyArray[$i]->term_taxonomy_id;
+
+        $taxonomy_name      =  $taxonomyArray[$i]->taxonomy_name;
+
+        // Add node Location
+        $location = $dom->createElement('location');
+        $location->setAttribute('locationId', $location_id);
+        $location->setAttribute('locationName', $location_name);
+        $taxonomy->appendChild($location);
+
+        //add node Post
+        //$post = $dom->createElement('post');
+        //$post->setAttribute('postId',$post_id);
+
+        //$post = $dom->createElement('post');
+        //$post->setAttribute('postId',$post_id);
+
+        $categoriesID     = $dom->createElement('categoriesID', $term_taxonomy_id);
+        $categoriesName     = $dom->createElement('categoriesName', $taxonomy_name);
+
+
+        $location->appendChild($categoriesID);
+        $location->appendChild($categoriesName);
+
+        //$location->appendChild($post);
+
+    }
+
+
+
+    $dom->save($filePath);
+
+}
+?>

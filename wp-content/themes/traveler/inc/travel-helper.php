@@ -2032,7 +2032,22 @@
                     return '';
                 }
             }
+            //hatran add select type in Home Tour
+            static function getListTaxonomy($location_id = '')
+            {
+                global $wpdb;
+                if ($location_id!='')
+                {
+                    $sql = "SELECT DISTINCT term_taxonomy_id, location_id,location_name,taxonomy_name FROM `wp_catelogies` where location_id='.$location_id.'";
+                }
+                    else {
+                        $sql = "SELECT DISTINCT term_taxonomy_id, location_id,location_name,taxonomy_name FROM `wp_catelogies` ";
+                }
 
+                $re = $wpdb->get_results($sql);
+                return $re;
+
+            }
             /**
              * @since 1.1.7
              *        updated 1.3.1
