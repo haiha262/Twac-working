@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
     $.ajax({
         type: 'GET',
         dataType: "xml",
-        url: 'taxonomy.xml',
+        url: './../taxonomy.xml',
         success: function (xml) {
             $i=0;
             $(xml).find('location').each(function(){
@@ -321,9 +321,6 @@ jQuery(document).ready(function($) {
                 }
                 //hatran add select type in Home Tour
                 replaceSelectType(value);
-
-
-
             }
 
             last_select_clicked.focusNextInputField();

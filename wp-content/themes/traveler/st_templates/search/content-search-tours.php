@@ -15,7 +15,7 @@ if(!isset($field_size)) $field_size='';
 ?>
 
 <h2 class='mb20'><?php echo esc_html($st_title_search) ?></h2>
-<?php $id_page = st()->get_option('tours_search_result_page');//hatran TODO : change the link to Search for Tour result
+<?php $id_page = st()->get_option('tours_search_result_page');
 if(!empty($id_page)){
     $link_action = get_the_permalink($id_page);
 }else{

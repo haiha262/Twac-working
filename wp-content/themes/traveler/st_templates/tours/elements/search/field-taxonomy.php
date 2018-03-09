@@ -9,7 +9,6 @@
  * Created by ShineTheme
  *
  */
-
 $default=array(
     'title'=>'',
     'taxonomy'=>'',
@@ -24,7 +23,7 @@ if(isset($data)){
 }
 
 if(!isset($field_size)) $field_size='lg';
-//hatran TODO this line the term is already get all Categories.
+
 $terms = get_terms($taxonomy,array('hide_empty'=> false));
 
 if($is_required == 'on'){
@@ -51,11 +50,7 @@ if (!empty($st_direction) and $st_direction == 'vertical') { $checkbox_item_size
             if(!empty($is_taxonomy[$taxonomy])){
                 $args['selected'] = $is_taxonomy[$taxonomy];
             }
-             //hatran hard code category
             wp_dropdown_categories( $args );
-            //hatran add select type in Home Tour
-            createXMLfile(TravelHelper::getListTaxonomy(''));
-
             ?>
         </div>
     <?php }else{ ?>
@@ -86,54 +81,3 @@ if (!empty($st_direction) and $st_direction == 'vertical') { $checkbox_item_size
         </div>
     <?php } ?>
 
-<?php
-//hatran add select type in Home Tour
-function createXMLfile($taxonomyArray){
-
-    $filePath = 'taxonomy.xml';
-    $dom     = new DOMDocument('1.0', 'utf-8');
-    $taxonomy      = $dom->createElement('Taxonomy');
-    $dom->appendChild($taxonomy);
-
-    $current_location_id = "";
-    for($i=0; $i<count($taxonomyArray); $i++){
-        $location_id       =  $taxonomyArray[$i]->location_id;
-
-        $location_name      =  $taxonomyArray[$i]->location_name;
-
-        //$post_id    =  $taxonomyArray[$i]->post_id;
-
-        $term_taxonomy_id     =  $taxonomyArray[$i]->term_taxonomy_id;
-
-        $taxonomy_name      =  $taxonomyArray[$i]->taxonomy_name;
-
-        // Add node Location
-        $location = $dom->createElement('location');
-        $location->setAttribute('locationId', $location_id);
-        $location->setAttribute('locationName', $location_name);
-        $taxonomy->appendChild($location);
-
-        //add node Post
-        //$post = $dom->createElement('post');
-        //$post->setAttribute('postId',$post_id);
-
-        //$post = $dom->createElement('post');
-        //$post->setAttribute('postId',$post_id);
-
-        $categoriesID     = $dom->createElement('categoriesID', $term_taxonomy_id);
-        $categoriesName     = $dom->createElement('categoriesName', $taxonomy_name);
-
-
-        $location->appendChild($categoriesID);
-        $location->appendChild($categoriesName);
-
-        //$location->appendChild($post);
-
-    }
-
-
-
-    $dom->save($filePath);
-
-}
-?>

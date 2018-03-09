@@ -53,7 +53,7 @@ get_template_part( 'breadcrumb' );
 $result_string = '';
 ?>
     <div class="mfp-with-anim mfp-dialog mfp-search-dialog mfp-hide" id="search-dialog">
-        <?php echo st()->load_template( 'tours/search-form-2' ); ?>
+        <?php //hatran disable one duplicate // echo st()->load_template( 'tours/search-form-2' ); ?>
     </div>
     <div class="container mb20">
         <?php echo apply_filters( 'the_content' , $old_page_content ); ?>
